@@ -61,22 +61,22 @@ class ViewController: UIViewController {
     let winChoiceIndex = 0
     
     let endingMessages = [
-        [], // Q0 – not an ending
-        [], // Q1 – not an ending
-        [], // Q2 – not an ending
-        [ // Q3
+        [],
+        [],
+        [],
+        [
             "Nobody was there and you froze to death waiting.",
             "You starved to death searching for escape."
         ],
-        [ // Q4
+        [
             "The figure was a hermit who guided you towards civilization.",
             "You tripped on a rock and hit your head, killing you."
         ],
-        [ // Q5
+        [
             "The map guided you to a cliff and you fell off.",
             "Your instincts guided you to a territorial moose that trampled you."
         ],
-        [ // Q6
+        [
             "The tree was dead and a large branch fell and hit you on the head.",
             "The cave had a hungry brown bear that mauled you."
         ]
@@ -87,8 +87,7 @@ class ViewController: UIViewController {
         lastChoice = choice
 
         if index == winQuestionIndex && choice == winChoiceIndex {
-            // Set index to a sentinel value so updateUI shows win
-            index = -1 // Any value outside question.count
+            index = -1
             updateUI()
             showResetButton()
             return
@@ -109,19 +108,14 @@ class ViewController: UIViewController {
         index = 0
         endingIndex = nil
         updateUI()
-
-        // Reassign button action back to choice(_:)
         if let button = option1.arrangedSubviews[0] as? UIButton {
             button.removeTarget(nil, action: nil, for: .allEvents)
             button.addTarget(self, action: #selector(choice(_:)), for: .touchUpInside)
         }
-
-        // Unhide second button
         if option1.arrangedSubviews.count >= 2 {
             option1.arrangedSubviews[1].isHidden = false
         }
     }
-    
     func showResetButton() {
         if option1.arrangedSubviews.count >= 2 {
             if let button = option1.arrangedSubviews[0] as? UIButton {
